@@ -1,4 +1,4 @@
-pipeline{
+pipeline {
 
 	agent any
 
@@ -8,21 +8,28 @@ pipeline{
 
 	stages {
 
-                stage('scm checkout'){
+        stage('scm checkout') {
+            
+            steps {
 
-                    git branch: 'master', credentialsId: 'git', url: 'https://github.com/srinivas46/pipe.git'
+                git branch: 'master', credentialsId: 'git', url: 'https://github.com/srinivas46/pipe.git'
+            }
 
-                              }
+        }
 
-                stage('execute maven'){
+        stage('execute maven') {
+            
+            steps {
 
-                     def mvnHome = tool name: 'MAVEN_HOME', type: 'maven'
+                def mvnHome = tool name: 'MAVEN_HOME', type: 'maven'
 
-                     def mvnCmd = "${mvnHome}/bin/mvn"
+                def mvnCmd = "${mvnHome}/bin/mvn"
 
-                     sh "${mvnCmd} clean package"
+                sh "${mvnCmd} clean package"
+                
+            }
 
-                             }
+        }
 
 		stage('Build') {
 
